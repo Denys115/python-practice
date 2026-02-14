@@ -129,3 +129,49 @@ def create_inventory(item_list):
         else:
             inventory[item] += 1
     return inventory
+
+
+#8
+#cafeneaua mea:
+#Meniul: Un dicționar cu produse și prețurile lor.
+#Comanda: O variabilă total_plata care începe de la 0.
+#Bucla: Clientul poate adăuga produse de mai multe ori.
+#Finalizarea: Când apasă o anumită tastă, îi afișezi cât are de plătit și închizi programul.
+#Definește meniu = {"espresso": 10, "latte": 15, "cappuccino": 12}
+
+meniu = {"espresso": 10, "latte": 15, "cappuccino": 12}
+total_plata = 0
+ruleaza = True
+print("Bine ati venit la cafenea!")
+
+while ruleaza == True:
+    print("\n1. Vezi Meniu | 2. Cumpara Cafea | 3. Nota de plata!")
+    optiune = input("Alege o opțiune: ")
+
+    if optiune == "1":
+        print(f"meniu actual: {meniu}")
+    elif optiune == "2":
+        comanda_in_curs = True
+        optiuni_cafea = list(meniu.keys())
+
+        while comanda_in_curs == True:
+            print("\n--- MENIU COMANDĂ ---")
+            print("0. Gata (Înapoi la meniul principal)")
+
+            for i in range(len(optiuni_cafea)):
+                nume_cafea = optiuni_cafea[i]
+                print(f"{i + 1}. {nume_cafea} - {meniu[nume_cafea]} lei")
+
+            alegere = int(input("\nCe număr doriți să adăugați? "))
+
+            if alegere == 0:
+                comanda_in_curs = False
+                print("Revenire la meniul principal...")
+            elif 1 <= alegere <= len(optiuni_cafea):
+                nume_selectat = optiuni_cafea[alegere - 1]
+                total_plata += meniu[nume_selectat]
+                print(f"Adăugat: {nume_selectat}. Total de plată: {total_plata} lei.")
+            else:
+                print(" Număr invalid! Te rog alege din listă.")
+    elif optiune == "3":
+        print(f"Nota dumneavoastră finală este de {total_plata} lei.sa aveti o zi frumoasă!")
