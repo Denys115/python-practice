@@ -145,7 +145,7 @@ ruleaza = True
 print("Bine ati venit la cafenea!")
 
 while ruleaza == True:
-    print("\n1. Vezi Meniu | 2. Cumpara Cafea | 3. Nota de plata!")
+    print("\n1. Vezi Meniu | 2. Cumpara Cafea | 3. Nota de plata! | 4. Anulează Comanda")
     optiune = input("Alege o opțiune: ")
 
     if optiune == "1":
@@ -175,3 +175,6 @@ while ruleaza == True:
                 print(" Număr invalid! Te rog alege din listă.")
     elif optiune == "3":
         print(f"Nota dumneavoastră finală este de {total_plata} lei.sa aveti o zi frumoasă!")
+    elif optiune == "4":
+        total_plata = 0
+        print("Comanda a fost anulată. Soldul este din nou 0 lei.")
