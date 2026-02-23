@@ -15,7 +15,7 @@ def main():
     run_git_command("git add .")
     print("Committing changes...")
     run_git_command(f'git commit -m "{mesaj}"')
-    print("Pushing to GitHun...")
+    print("Pushing to GitHub...")
     run_git_command("git push origin main")
     print("Deployment successful!")
 
