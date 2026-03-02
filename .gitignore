@@ -1,5 +1,28 @@
-venv/
+# --- IDE & System ---
 .idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# --- Python & Environments ---
+venv/
+env/
 __pycache__/
+*.py[cod]
+*$py.class
 *.pyc
 db.sqlite3
+
+# --- File Guardian Specific (Adaugă astea!) ---
+# Nu vrei să urci rapoartele generate pe GitHub
+log_analysis_report.txt
+reports/
+*.log
+
+# Fișiere de configurare cu căi locale (Personal)
+# Recomandare: Pune config.json aici și urcă un config.example.json în loc
+config.json
+
+# Fișiere temporare sau de backup
+*.bak
+*.tmp
