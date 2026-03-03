@@ -1,14 +1,12 @@
 import os
-import datetime
-
+from datetime import datetime, timedelta
 
 def scan_files(directory, hours=24, extensions=None, recursive=False):
     if not os.path.isdir(directory):
         raise ValueError(f"Directory does not exist: {directory}")
-
     recent_files = []
-    now = datetime.datetime.now()
-    cutoff = now - datetime.timedelta(hours=hours)
+    now = datetime.now()
+    cutoff = now - timedelta(hours=hours)
 
     walker = os.walk(directory) if recursive else [
         (directory, [], os.listdir(directory))
@@ -17,22 +15,25 @@ def scan_files(directory, hours=24, extensions=None, recursive=False):
     for root, _, files in walker:
         for file in files:
             full_path = os.path.join(root, file)
-
             if extensions:
                 if not any(file.lower().endswith(ext.lower()) for ext in extensions):
                     continue
             try:
-                modification_time = datetime.datetime.fromtimestamp(
+                modification_time = datetime.fromtimestamp(
                     os.path.getmtime(full_path)
                 )
 
                 if modification_time >= cutoff:
                     recent_files.append(full_path)
 
-            except Exception:
+            except PermissionError:
+                continue
+
+            except OSError:
                 continue
 
     return recent_files
+
 
 def analyze_file(file_path, patterns):
     if not patterns:
@@ -49,7 +50,7 @@ def analyze_file(file_path, patterns):
                 line_has_error = False
 
                 for pattern in patterns:
-                    if pattern in line:
+                    if pattern.lower() in line.lower():
                         results[pattern] += 1
                         line_has_error = True
 

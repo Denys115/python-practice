@@ -7,3 +7,9 @@ Vreau să fac un tool care să îmi curețe automat folderele (ca Downloads), s�
 3. Am creat un scanner care caută fișiere modificate recent (ultimele 24h).
 4. Am implementat logica de căutare pentru ERROR, FATAL și CRITICAL.
 5. Am adăugat protecție (try/except) ca să nu crape dacă dă peste fișiere de sistem protejate.
+
+# Progres Ziua 2 - Integrare și Modularizare
+Am transformat scriptul într-o aplicație modulară, împărțind codul în 3 componente principale:
+1. logger.py: Un modul dedicat pentru jurnalizarea activității, cu suport pentru nivele de prioritate (INFO, ERROR, CRITICAL).
+2. analyzer.py: Motorul de scanare care caută fișiere modificate recent și analizează conținutul acestora (case-insensitive).
+3. main.py: Coordonează fluxul de lucru și generează statistici finale (numărul total de erori găsite).
