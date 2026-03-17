@@ -24,3 +24,14 @@ Am transformat File Guardian dintr-un tool manual intr-un serviciu de monitoriza
 3. utilities.py: Modul nou care genereaza "amprente digitale" (Hash SHA-256) unice pentru fiecare fisier.
 4. validator.py: Motor de comparatie care detecteaza imediat daca un fisier a fost modificat neautorizat.
 5. Hibridizare Analiza vs Securitate: Sistemul verifica integritatea pentru toate tipurile de fisiere (inclusiv .pdf, .json), dar ruleaza analiza de text doar pe fisierele de tip log sau config.
+# Progres Ziua 4 - Data Lifecycle & Lifecycle Management
+Am finalizat ciclul de viață al fișierelor și am pregătit sistemul pentru mediul de producție:
+
+1. sorter.py: Implementarea unui sistem de sortare automată care mută fișierele procesate într-un "Vault" organizat pe extensii.
+2. Data Lifecycle Management: Am creat un flux complet (Input -> Analiză -> Securitate -> Arhivare) pentru a preveni aglomerarea serverului.
+3. Optimizare Performanță: Am implementat citirea fișierelor în blocuri (chunks) de 4096 bytes pentru a asigura un consum minim de memorie RAM, indiferent de mărimea fișierelor scanate.
+## Cum se rulează:
+1. Creează folderele necesare: `mkdir logs vault`
+2. Configurează directorul țintă în `config.py`.
+3. Rulează aplicația: `python3 main.py`
+4. Urmărește alertele în terminal sau în `audit.log`.
