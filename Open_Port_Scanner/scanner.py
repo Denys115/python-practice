@@ -6,8 +6,9 @@ def check(host:str, port:int):
     IPV4:int = socket.AF_INET
     TCP:int = socket.SOCK_STREAM
     Address:tuple[str, int] = (host, port)
+    
     with socket.socket(IPV4, TCP) as s:
-        s.settimeout(1) 
+        s.settimeout(1)
         result:int = s.connect_ex(Address)
         if result == 0:
             return f"Port {port} is OPEN"
@@ -15,7 +16,7 @@ def check(host:str, port:int):
 
 def main():
     if len(sys.argv) != 4:
-        print("Usage: python scanner.py <host> <start_port> <end_port>")
+        print("Usage: python3 scanner.py <host> <start_port> <end_port>")
         sys.exit(1)
 
     host = sys.argv[1]
@@ -28,13 +29,17 @@ def main():
     print("-" * 50)
 
     try:
+        print(f"Cautam porturi deschise...\n")
         for port in range(start_port, end_port + 1):
+            sys.stdout.write(f"\r[#] Verificam portul: {port}...")
+            sys.stdout.flush()
+
             status = check(host, port)
             if status:
-                print(f"[+] {status}")
+                print(f"\n[+] {status} !!!") 
             
     except KeyboardInterrupt:
-        print("\n[!] Scanare oprită de utilizator.")
+        print("\n[!] Scanare oprita de utilizator.")
         sys.exit()
     except socket.gaierror:
         print("\n[!] Hostname-ul nu a putut fi rezolvat.")
@@ -43,7 +48,7 @@ def main():
         print("\n[!] Nu s-a putut stabili conexiunea cu serverul.")
         sys.exit()
 
-    print("-" * 50)
+    print(f"\n" + "-" * 50) # \n adauga un rand liber la final
     print(f"Scan completed at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
 if __name__ == "__main__":
